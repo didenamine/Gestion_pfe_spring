@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,4 +20,6 @@ public class Etudiant extends Utilisateur {
 	private Filiere filiere;
 	@Enumerated(EnumType.STRING)
 	private Niveau niveau;
+	@ManyToOne
+	private Pfe pfe;
 }
