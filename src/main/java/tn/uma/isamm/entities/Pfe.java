@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,8 @@ public class Pfe {
 	private List<Etudiant> etudiants = new ArrayList<>();
 	@ManyToOne
 	private Etudiant binomeInvite;
+	@OneToOne(mappedBy = "pfe")
+	private Soutenance soutenance;
 	@Version
 	private Long version;
 
