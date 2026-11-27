@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(titre)">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${titre} + ' - Gestion des PFE'">Gestion des PFE</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<header th:fragment="menu" class="barre">
+		<a class="logo" th:href="@{/}">Gestion des PFE</a>
+		<nav sec:authorize="isAuthenticated()">
+			<th:block sec:authorize="hasRole('ETUDIANT')">
+				<a th:href="@{/etudiant/tableau-bord}">Mon PFE</a>
+				<a th:href="@{/etudiant/sujet}">Mon sujet</a>
+			</th:block>
+			<th:block sec:authorize="hasRole('ENSEIGNANT')">
+				<a th:href="@{/enseignant/tableau-bord}">Tableau de bord</a>
+				<a th:href="@{/enseignant/sujets}">Sujets disponibles</a>
+			</th:block>
+			<th:block sec:authorize="hasRole('ADMINISTRATEUR')">
+				<a th:href="@{/admin/tableau-bord}">Tableau de bord</a>
+				<a th:href="@{/admin/pfe}">PFE</a>
+				<a th:href="@{/admin/soutenances}">Soutenances</a>
+				<a th:href="@{/admin/utilisateurs}">Utilisateurs</a>
+				<a th:href="@{/admin/parametres}">Paramètres</a>
+			</th:block>
+		</nav>
+		<div class="session" sec:authorize="isAuthenticated()">
+			<span sec:authentication="name">email</span>
+			<form th:action="@{/logout}" method="post">
+				<button type="submit" class="bouton-lien">Déconnexion</button>
+			</form>
+		</div>
+	</header>
+
+	<div th:fragment="messages">
+		<div class="alerte alerte-succes" th:if="${message}" th:text="${message}"></div>
+		<div class="alerte alerte-erreur" th:if="${erreur}" th:text="${erreur}"></div>
+	</div>
+
+</body>
+</html>
